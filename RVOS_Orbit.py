@@ -235,6 +235,6 @@ def fitOrbits(star,P_G,periodList,obs_data,niter,n_pls=None,guesses=None,ignoreP
             star.planets_fit[i] = p
         star.nPlanets_fit = n_pls
         star.RV_fit = RV_fit
-        star.params_out = params_out
-        star.params_out_print = np.array([p_opt,e_opt,tp_opt,np.array(w_opt)*180./pi,K_opt,msini_fit])
+        #star.params_out = params_out
+        #star.params_out_print = np.array([p_opt,e_opt,tp_opt,np.array(w_opt)*180./pi,K_opt,msini_fit])
         star.params_LMfit = params

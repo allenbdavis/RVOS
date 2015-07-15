@@ -62,7 +62,7 @@ def makePlot(sim,numpoints=500,fill=True,save='',fmt='png',hide_True=False,date=
     plt.xlim(star.obsList[0],star.obsList[-1])    
     
     
-    if sim.find_uncs:
+    if sim.find_uncs and False:
         #ALSO A PAIN WITH MULTIPLE PLANETS. DISABLING FOR NOW
         title_str = (r'$M_{star}$=%.2f $M_{\odot}$, $N_{obs}$=%d, $\sigma_{RV}$=%.2f m/s'
                      '\nTrue: per=%.4f days, mass=%.2f $M_{\oplus}$, ecc=%.2f, w=%.2f deg'
