@@ -237,3 +237,6 @@ def printOutput(star):
 	else:
 		print unc_str
 	sys.stdout.flush()
+
+def SaveSytem(star,planets):
+	return True
