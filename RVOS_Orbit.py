@@ -68,7 +68,7 @@ def calcKepler(Marr_in, eccarr_in):
         convd = np.where(abs(fiarr) > conv)   #;test for convergence; update indices
 
         if count > 100:
-            #print "WARNING!  Kepler's equation not solved!!!"
+            #print("WARNING!  Kepler's equation not solved!!!")
             break
 
     return Earr
@@ -76,7 +76,7 @@ def calcKepler(Marr_in, eccarr_in):
 	
 ### Solving orbit with LMfit
 def fitOrbits(star,P_G,periodList,obs_data,niter,n_pls=None,guesses=None,ignorePeriods=None,perThres=None,flag=None):
-    
+    print('flag:',flag)
     # Get number of planets to be fit
     if n_pls == None:
         n_pls = np.size(star.planets)
@@ -134,9 +134,9 @@ def fitOrbits(star,P_G,periodList,obs_data,niter,n_pls=None,guesses=None,ignoreP
     
     # Exclude peaks we want to ignore for fitting
     if not ignorePeriods == None:
-        
+        print(ignorePeriods)
         assert type(ignorePeriods) is list and \
-        [np.size(el) for el in ignorePeriods] == [2]*(np.size(ignorePeriods)/2),\
+        [np.size(el) for el in ignorePeriods] == [2]*int(np.size(ignorePeriods)/2),\
         'ignorePeriods must be of the form: [[min,max],[mix,max],...].'
         
         for pair in ignorePeriods:
@@ -157,6 +157,7 @@ def fitOrbits(star,P_G,periodList,obs_data,niter,n_pls=None,guesses=None,ignoreP
             if perThres == None:
                 params.add('P'+tag, value= p_guesses[m], min=0)
             else:
+                print(p_guesses)
                 params.add('P'+tag, value= p_guesses[m], min=p_guesses[m]*(1-perThres), max=p_guesses[m]*(1+perThres))
             params.add('e'+tag, value= 0.7*np.random.random(), min=0, max=1)
             params.add('tp'+tag, value= star.t0+(np.random.random()*p_guesses[m]))

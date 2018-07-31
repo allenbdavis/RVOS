@@ -230,12 +230,12 @@ def printOutput(star):
 		except AttributeError:
 			pass
 
-	print inj_str
-	print fit_str
+	print(inj_str)
+	print(fit_str)
 	if unc_str=='':
-		print 'Uncertainties not calculated.'
+		print('Uncertainties not calculated.')
 	else:
-		print unc_str
+		print(unc_str)
 	sys.stdout.flush()
 
 def SaveSytem(star,planets):

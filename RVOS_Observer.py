@@ -1,4 +1,5 @@
 import numpy as np
+from tqdm import tqdm
 from astropy import units as u
 from astropy.time import Time
 from astropy.coordinates import AltAz, get_sun
@@ -15,6 +16,7 @@ def observeStar(star,ndays,std_True,t0_in,coord,loc,t_res,objAltThres,weather):
     sep = 1.*u.day
     obsList = []
     
+    pbar = tqdm(total=ndays)
     attempted_obs = 0
     
     def pickingLoop(obsList,t,attempted_obs,sep,ndays,flag1=True,flag2=True):
@@ -24,7 +26,7 @@ def observeStar(star,ndays,std_True,t0_in,coord,loc,t_res,objAltThres,weather):
             
             if todaysweather < weather: #it's clear; let's observe!
                 obsList = np.append(obsList,nextObsTime)
-            
+                pbar.update(1)
             t = nextObsTime + sep
             attempted_obs += 1
         return obsList,t,attempted_obs
@@ -48,6 +50,7 @@ def observeStar(star,ndays,std_True,t0_in,coord,loc,t_res,objAltThres,weather):
             sep = 10.*u.day
             obsList,t,attempted_obs = pickingLoop(obsList,t,attempted_obs,sep,ndays)
 
+    pbar.close()
     # Save the obsList
     star.obsList_units = obsList #in terms of astropy units
     star.obsList = removeUnits(obsList) #simple JD values
